@@ -6,7 +6,7 @@ words = []
 endings = []
 pattern1 = re.compile(r'[А-Яа-яіїєІЇ\']+')
 pattern2 = re.compile(r'([А-Яа-яіїєІЇ\`]{3})[ .,;\n\t]')
-with open('../Lab 2/a.txt', mode='r', encoding='utf-8') as a:
+with open('a.txt', mode='r', encoding='utf-8') as a:
     for i, line in enumerate(a):
         endings.extend(pattern2.findall(line))
         for j, word in enumerate(pattern1.findall(line)):
@@ -29,4 +29,4 @@ for word in counter:
             string += ''.join(str(el))
     ET.SubElement(root, "word").text = word + '-' + str(counter[word]) + '-' + string
 tree = ET.ElementTree(root)
-tree.write("../Lab 2/unique.xml", encoding='utf-8')
+tree.write("unique.xml", encoding='utf-8')

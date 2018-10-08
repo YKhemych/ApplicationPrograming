@@ -1,12 +1,12 @@
-f = open('../Lab 2/a.txt', mode='r', encoding='utf-8')
+f = open('a.txt', mode='r', encoding='utf-8')
 content = f.readlines()
 f.close()
 
 # content = [x.strip() for x in content]
 # print('All lines: ', content)
 
-b1 = open('../Lab 2/b1.txt', mode='w', encoding='utf-8')
-b2 = open('../Lab 2/b2.txt', mode='w', encoding='utf-8')
+b1 = open('b1.txt', mode='w', encoding='utf-8')
+b2 = open('b2.txt', mode='w', encoding='utf-8')
 upperLines = []
 lowerLines = []
 for i, line in enumerate(content):

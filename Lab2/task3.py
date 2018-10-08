@@ -2,9 +2,9 @@ import re
 import xml.etree.cElementTree as ET
 from collections import Counter
 
-pattern = re.compile('\w+\'\w+|\w+')
+pattern = re.compile('\w+')
 words = []
-with open('../Lab 2/a.txt', mode='r', encoding='utf-8') as a:
+with open('a.txt', mode='r', encoding='utf-8') as a:
     for line in a:
         for word in re.findall(pattern, line):
             words.append(word)
@@ -21,4 +21,4 @@ root = ET.Element("root")
 for word in counter:
     ET.SubElement(root, "word", number=str(counter[word])).text = word
 tree = ET.ElementTree(root)
-tree.write("../Lab 2/unique.xml", encoding='utf-8')
+tree.write("unique.xml", encoding='utf-8')
