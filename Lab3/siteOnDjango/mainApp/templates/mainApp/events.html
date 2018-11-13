@@ -1,0 +1,53 @@
+{% extends 'mainApp\wrapper.html' %}
+
+{% block content %}
+<div class="display-flex justify-content-center">
+  <h1> Події </h1>
+  <!-- <p>{{date | date:"d-m-Y"}}</p> -->
+  <!-- <p>{{request.GET}}</p> -->
+</div>
+
+<div class="display-flex justify-content-center">
+  <div class="form-group row">
+    <div class="">
+      <form id="mainForm" action="/events/" method="POST" class="display-flex justify-content-center flex-direction-column">
+        {% csrf_token %}
+        <input class="form-control" type="date" value='{{date | date:"Y-m-d"}}' name="date">
+        <button type="submit" class="btn btn-primary margin-0">Показати</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="display-flex justify-content-center flex-direction-column padding-0-10pc">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Назва</th>
+          <th scope="col">Опис</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td><a href="/events/{{event.id}}">{{event.title}}</a></td>
+          <td class="text-overflow-ellipsis">{{event.description | linebreaks}}</td>
+          <td class="display-flex"><a id="saveEvent" class="btn outline-none" href="/deleteEvent/{{event.id}}">Видалити</a></td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <th scope="row">#</th>
+          <td><input form="mainForm" type="text" name="title" class="outline-none"></td>
+          <td> <input form="mainForm" type="text" name="description" class="outline-none"></td>
+          <td><button form="mainForm" id="saveEvent" class="btn btn-primary outline-none" onclick="">Додати</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <a href="/events/{{event.id}}"><h3>{{event.title}}</h3></a>
+    <h5>{{event.date | date:"d-m-Y"}}</h5> -->
+</div>
+
+{% endblock content %}

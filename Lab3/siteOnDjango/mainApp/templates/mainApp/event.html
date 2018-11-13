@@ -1,0 +1,56 @@
+{% extends 'mainApp\wrapper.html' %}
+
+{% block content %}
+<div class="display-flex justify-content-space-between">
+  <form action="/events/" method="POST" class="">
+    {% csrf_token %}
+    <input class="form-control" type="date" value='{{event.date | date:"Y-m-d"}}' name="date" hidden>
+    <button type="submit" class="btn btn-dark">Назад</button>
+  </form>
+  <button class="btn btn-dark" id="edit" >Редагувати</button>
+</div>
+<br>
+<div class="display-flex justify-content-center flex-direction-column" id="mainArea">
+  <h1 class="text-align-center" id="title"> {{event.title}} </h1>
+  <h6 class="text-align-center" id="date">{{event.date | date:"d-m-Y"}}</h6>
+  <form id="mainForm" class="display-flex justify-content-center flex-direction-column padding-0-20pc" action="/events/{{event.id}}/" method="post">
+    {% csrf_token %}
+  </form>
+</div>
+
+<div class="display-flex justify-content-center padding-0-10pc">
+  <p class="white-space-pre-wrap" id="description">{{event.description}}</p>
+</div>
+<hr>
+<div class="display-flex justify-content-center padding-0-10pc flex-direction-column">
+  <h4 class="text-align-center"> Запрошені</h4>
+  <p class="text-align-center"> {{error}} </p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ім'я</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for follow in followers %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{follow.user_id}}</td>
+        <td><a id="saveEvent" class="btn outline-none" href="/deleteFollower/{{event.id}}/{{follow.user_id.id}}/">Видалити</a></td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <form class="" action="/events/{{event.id}}/" method="post">
+          {% csrf_token %}
+          <th scope="row">#</th>
+          <td><input type="text" name="username" class="outline-none" placeholder="Username"></td>
+          <td><button id="saveEvent" class="btn btn-primary outline-none" onclick="">Додати</button></td>
+        </form>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

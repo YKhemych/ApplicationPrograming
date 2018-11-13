@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/mainStyle.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark padding-0-10pc">
+    <a class="navbar-brand" href="/">Календар</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item ">
+          <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Вийти</a>
+        </li>
+        <form id="logout" action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden">
+        </form>
+        {% else %}
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'signup' %}">Реєстація</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Вхід</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+    {% block content %}
+    {% endblock content %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    {% load staticfiles %}
+    <script src="{% static 'js/edit.js' %}"/></script>
+</body>
+</html>

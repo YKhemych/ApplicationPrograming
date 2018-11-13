@@ -1,0 +1,27 @@
+{% extends 'mainApp\wrapper.html' %}
+
+{% block content %}
+<div class="display-flex justify-content-center">
+  <h1> Login</h1>
+  <br>
+  {% if error %}
+  {{error}}
+  <br>
+  <br>
+  {% endif %}
+</div>
+
+<div class="display-flex justify-content-center">
+  <form id="loginForm" class="display-flex justify-content-center flex-direction-column" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <p class="margin-0">UserName:</p>
+    <input type="text" name="username">
+    <p class="margin-0">Password:</p>
+    <input type="password" name="password" value="">
+    <input type="submit" class="btn btn-primary margin-0" value="Вхід">
+
+  </form>
+</div>
+
+
+{% endblock content %}

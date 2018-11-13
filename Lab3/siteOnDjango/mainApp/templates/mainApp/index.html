@@ -1,0 +1,20 @@
+{% extends 'mainApp\wrapper.html' %}
+
+{% block content %}
+<div class="display-flex justify-content-center align-content-center ">
+  {% if user.is_authenticated %}
+  <div class="display-flex justify-content-center align-content-center">
+    <a href="events/" class="btn"> <h1> Перейти до календаря</h1> </a>
+  </div>
+  {% else %}
+  <div class="display-flex flex-direction-column">
+    <br>
+    <br>
+    <h1 class="text-align-center"> Календар подій</h1>
+    <h3>Увійдіть або зареєструйтеся</h3>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock content %}
